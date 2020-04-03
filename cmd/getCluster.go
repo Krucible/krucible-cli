@@ -19,7 +19,7 @@ var getClusterCmd = &cobra.Command{
 			panic(err)
 		}
 
-		j, err := json.Marshal(cluster)
+		j, err := json.MarshalIndent(cluster, "", "  ")
 		if err != nil {
 			panic(err)
 		}
