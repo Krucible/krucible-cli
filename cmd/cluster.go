@@ -17,22 +17,19 @@ var clusterCmd = &cobra.Command{
 	Use:   "cluster",
 	Short: "Create a new cluster",
 	Run: func(cmd *cobra.Command, args []string) {
-		//c := krucible.NewClient(krucible.ClientConfig{
-		//APIKeyId:     "something",
-		//APIKeySecret: "somethingelse",
-		//})
-		c := getClientOrDie()
+		client := getClientOrDie()
 		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond)
+		s.Prefix = "Creating cluster... "
 		s.Start()
-		cluster, err := c.CreateCluster(krucible.CreateClusterConfig{
+		newClusterResult, err := client.CreateCluster(krucible.CreateClusterConfig{
 			DisplayName: DisplayName,
 		})
 		s.Stop()
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		fmt.Println(cluster)
+		fmt.Fprintln(os.Stderr, "Cluster "+newClusterResult.Cluster.ID+" created and ready to use!")
 	},
 }
 
