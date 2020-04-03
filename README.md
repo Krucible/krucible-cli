@@ -1,13 +1,16 @@
 Krucible CLI
 ============
 
-This is the official commandline interface for [Krucible](https://usekrucible.com), the platform for
-creating ephemeral Kubernetes clusters optimised for testing and development.
+This is the official commandline interface for
+[Krucible](https://usekrucible.com), the platform for creating ephemeral
+Kubernetes clusters optimised for testing and development.
 
 Installation
 ------------
 
-Download the relevant binary for your OS from the latest release and put it on your PATH. Simple.
+Download the relevant binary for your OS from the [latest
+release](https://github.com/Krucible/krucible-cli/releases/latest) and put it
+on your PATH. Simple.
 
 Usage
 -----
