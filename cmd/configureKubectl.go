@@ -20,21 +20,26 @@ func runKubectlCommand(args ...string) {
 	}
 }
 
+func configureKubectl(clusterID, server string) {
+	runKubectlCommand("config", "set-cluster", clusterID, "--server", server)
+	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID)
+	runKubectlCommand("config", "use-context", clusterID)
+}
+
 // configureKubectlCmd represents the configure-kubectl command
 var configureKubectlCmd = &cobra.Command{
 	Use:   "configure-kubectl [krucible cluster ID]",
 	Args:  cobra.ExactArgs(1),
 	Short: "Configure your kubectl context to connect to the given Krucible cluster",
 	Run: func(cmd *cobra.Command, args []string) {
+		clusterID := args[0]
 		client := getClientOrDie()
-		cluster, err := client.GetCluster(args[0])
+		cluster, err := client.GetCluster(clusterID)
 		if err != nil {
 			panic(err)
 		}
 
-		runKubectlCommand("config", "set-cluster", cluster.ID, "--server", cluster.ConnectionDetails.Server)
-		runKubectlCommand("config", "set-context", cluster.ID, "--cluster", cluster.ID)
-		runKubectlCommand("config", "use-context", cluster.ID)
+		configureKubectl(cluster.ID, cluster.ConnectionDetails.Server)
 	},
 }
 

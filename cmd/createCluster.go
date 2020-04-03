@@ -11,6 +11,7 @@ import (
 )
 
 var DisplayName string
+var ConfigureKubectlFlag bool
 
 // clusterCmd represents the cluster command
 var clusterCmd = &cobra.Command{
@@ -30,6 +31,13 @@ var clusterCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		fmt.Fprintln(os.Stderr, "Cluster "+newClusterResult.Cluster.ID+" created and ready to use!")
+
+		if ConfigureKubectlFlag {
+			configureKubectl(
+				newClusterResult.Cluster.ID,
+				newClusterResult.Cluster.ConnectionDetails.Server,
+			)
+		}
 	},
 }
 
@@ -45,6 +53,7 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// clusterCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	clusterCmd.Flags().BoolVarP(&ConfigureKubectlFlag, "configure-kubectl", "k", false, "Configure kubectl context for connection to your cluster")
 	clusterCmd.Flags().StringVarP(&DisplayName, "display-name", "n", "", "Desired display name for the cluster")
 	clusterCmd.MarkFlagRequired("display-name")
 }
