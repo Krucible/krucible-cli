@@ -28,16 +28,14 @@ $ krucible create cluster --display-name $desiredClusterName --configure-kubectl
 Optionally, `krucible` can configure your `kubectl` context so that you can
 immediately connect to your cluster.
 
-Retrieving a cluster
---------------------
+### Retrieving a cluster
 ```
 $ krucible get cluster $clusterUUID
 ```
 A cluster can be retrieved with the above comand. The argument provided should
 be the UUID of the cluster.
 
-Connecting to a cluster
------------------------
+### Connecting to a cluster
 ```
 $ krucible configure-kubectl $clusterUUID
 ```
