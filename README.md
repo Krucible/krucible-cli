@@ -22,11 +22,11 @@ $ krucible create cluster --display-name $desiredClusterName
 A cluster can be created with the above command. The `--display-name` flag is
 mandatory.
 
+Optionally, `krucible` can configure your `kubectl` context so that you can
+immediately connect to your cluster:
 ```
 $ krucible create cluster --display-name $desiredClusterName --configure-kubectl
 ```
-Optionally, `krucible` can configure your `kubectl` context so that you can
-immediately connect to your cluster.
 
 ### Retrieving a cluster
 ```
