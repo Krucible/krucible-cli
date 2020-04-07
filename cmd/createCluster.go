@@ -30,7 +30,7 @@ var clusterCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		fmt.Fprintln(os.Stderr, "Cluster "+newClusterResult.Cluster.ID+" created and ready to use!")
+		fmt.Fprintln(os.Stderr, newClusterResult.Cluster.ID)
 
 		if ConfigureKubectlFlag {
 			configureKubectl(
