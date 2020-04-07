@@ -10,7 +10,7 @@ import (
 
 func getClientOrDie() *krucible.Client {
 	if !viper.IsSet("apiKeyId") || !viper.IsSet("apiKeySecret") || !viper.IsSet("accountId") {
-		fmt.Fprintln(os.Stderr, "Error: authentication not configured. Please run krucible config set.")
+		fmt.Fprintln(os.Stderr, "Error: authentication not configured. Please run krucible set-config")
 		os.Exit(1)
 	}
 
