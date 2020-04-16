@@ -13,6 +13,8 @@ github.com/Krucible/krucible-go-client v0.0.0-20200402145033-3b3f35e8aad0 h1:gV2
 github.com/Krucible/krucible-go-client v0.0.0-20200402145033-3b3f35e8aad0/go.mod h1:VyZkI982uW+6n2JBSJkv+Czkqo5ZM0EC6DJOGB4sS5I=
 github.com/Krucible/krucible-go-client v0.0.0-20200402181427-236d59c72094 h1:q8cBKVSTjqyQY2CQmjfOgL3NxDiWXFoJMASkU9esyFg=
 github.com/Krucible/krucible-go-client v0.0.0-20200402181427-236d59c72094/go.mod h1:VyZkI982uW+6n2JBSJkv+Czkqo5ZM0EC6DJOGB4sS5I=
+github.com/Krucible/krucible-go-client v0.0.0-20200407102518-34c8d29c7090 h1:TPiNRT8gsHEMtP5k7pdv/Y0ErDCNKELUlMmBbVqxnfk=
+github.com/Krucible/krucible-go-client v0.0.0-20200407102518-34c8d29c7090/go.mod h1:VyZkI982uW+6n2JBSJkv+Czkqo5ZM0EC6DJOGB4sS5I=
 github.com/NYTimes/gziphandler v0.0.0-20170623195520-56545f4a5d46/go.mod h1:3wb06e3pkSAbeQ52E9H9iFoQsEEwGN64994WTCIhntQ=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/PuerkitoBio/purell v1.0.0/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=

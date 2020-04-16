@@ -22,7 +22,7 @@ var clusterCmd = &cobra.Command{
 		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond)
 		s.Prefix = "Creating cluster... "
 		s.Start()
-		newClusterResult, err := client.CreateCluster(krucible.CreateClusterConfig{
+		cluster, _, err := client.CreateCluster(krucible.CreateClusterConfig{
 			DisplayName: DisplayName,
 		})
 		s.Stop()
@@ -30,12 +30,12 @@ var clusterCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		fmt.Fprintln(os.Stderr, newClusterResult.Cluster.ID)
+		fmt.Fprintln(os.Stderr, cluster.ID)
 
 		if ConfigureKubectlFlag {
 			configureKubectl(
-				newClusterResult.Cluster.ID,
-				newClusterResult.Cluster.ConnectionDetails.Server,
+				cluster.ID,
+				cluster.ConnectionDetails.Server,
 			)
 		}
 	},

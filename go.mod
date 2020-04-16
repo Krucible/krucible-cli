@@ -3,7 +3,7 @@ module github.com/Krucible/krucible-cli
 go 1.14
 
 require (
-	github.com/Krucible/krucible-go-client v0.0.0-20200402181427-236d59c72094
+	github.com/Krucible/krucible-go-client v0.0.0-20200407102518-34c8d29c7090
 	github.com/briandowns/spinner v1.10.0
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
