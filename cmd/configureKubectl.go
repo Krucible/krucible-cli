@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
+	"path"
 
 	"github.com/spf13/cobra"
 )
@@ -20,9 +22,16 @@ func runKubectlCommand(args ...string) {
 	}
 }
 
-func configureKubectl(clusterID, server string) {
-	runKubectlCommand("config", "set-cluster", clusterID, "--server", server)
-	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID)
+func configureKubectl(clusterID, server, ca string) {
+	filePath := path.Join(getConfigDirOrDie(), clusterID+"-cert.pem")
+	ioutil.WriteFile(filePath, []byte(ca), 0644)
+	runKubectlCommand("config",
+		"set-cluster", clusterID,
+		"--server", server,
+		"--certificate-authority", filePath,
+	)
+	runKubectlCommand("config", "set-credentials", "krucible-"+clusterID, "--token", "krucible")
+	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID, "--user", "krucible")
 	runKubectlCommand("config", "use-context", clusterID)
 }
 
@@ -39,7 +48,16 @@ var configureKubectlCmd = &cobra.Command{
 			panic(err)
 		}
 
-		configureKubectl(cluster.ID, cluster.ConnectionDetails.Server)
+		if cluster.State != "running" {
+			fmt.Fprintln(os.Stderr, "Cluster not in running state")
+			os.Exit(1)
+		}
+
+		configureKubectl(
+			cluster.ID,
+			cluster.ConnectionDetails.Server,
+			cluster.ConnectionDetails.CertificateAuthority,
+		)
 	},
 }
 

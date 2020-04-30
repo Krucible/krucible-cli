@@ -71,6 +71,7 @@ var clusterCmd = &cobra.Command{
 			configureKubectl(
 				cluster.ID,
 				cluster.ConnectionDetails.Server,
+				cluster.ConnectionDetails.CertificateAuthority,
 			)
 		}
 	},
