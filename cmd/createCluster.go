@@ -44,6 +44,7 @@ func (df *durationFlag) Type() string {
 var DisplayName string
 var ClusterDuration durationFlag
 var ConfigureKubectlFlag bool
+var SnapshotID string
 
 // clusterCmd represents the cluster command
 var clusterCmd = &cobra.Command{
@@ -57,6 +58,7 @@ var clusterCmd = &cobra.Command{
 		cluster, _, err := client.CreateCluster(krucible.CreateClusterConfig{
 			DisplayName:     DisplayName,
 			DurationInHours: ClusterDuration.duration,
+			SnapshotID:      SnapshotID,
 		})
 		s.Stop()
 		if err != nil {
@@ -89,6 +91,7 @@ func init() {
 	clusterCmd.Flags().BoolVarP(&ConfigureKubectlFlag, "configure-kubectl", "k", false, "Configure kubectl context for connection to your cluster")
 	clusterCmd.Flags().StringVarP(&DisplayName, "display-name", "n", "", "Desired display name for the cluster")
 	clusterCmd.Flags().VarP(&ClusterDuration, "cluster-duration", "d", "The amount of time the cluster should persist for")
+	clusterCmd.Flags().StringVarP(&SnapshotID, "snapshot", "s", "", "The ID of the snapshot to use")
 	clusterCmd.MarkFlagRequired("display-name")
 	clusterCmd.MarkFlagRequired("cluster-duration")
 }
