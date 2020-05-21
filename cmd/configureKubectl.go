@@ -32,7 +32,7 @@ func configureKubectl(clusterID, server, ca string) {
 		"--embed-certs",
 	)
 	runKubectlCommand("config", "set-credentials", "krucible-"+clusterID, "--token", "krucible")
-	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID, "--user", "krucible")
+	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID, "--user", "krucible-"+clusterID)
 	runKubectlCommand("config", "use-context", clusterID)
 }
 
