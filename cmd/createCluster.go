@@ -52,7 +52,7 @@ var clusterCmd = &cobra.Command{
 	Short: "Create a new cluster",
 	Run: func(cmd *cobra.Command, args []string) {
 		client := getClientOrDie()
-		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond)
+		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond, spinner.WithWriter(os.Stderr))
 		s.Prefix = "Creating cluster... "
 		s.Start()
 		cluster, _, err := client.CreateCluster(krucible.CreateClusterConfig{
@@ -65,7 +65,8 @@ var clusterCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		fmt.Fprintln(os.Stderr, cluster.ID)
+		fmt.Fprint(os.Stdout, cluster.ID)
+		fmt.Fprintln(os.Stderr, "")
 
 		if ConfigureKubectlFlag {
 			configureKubectl(
