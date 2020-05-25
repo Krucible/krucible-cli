@@ -22,7 +22,7 @@ func runKubectlCommand(args ...string) {
 	}
 }
 
-func configureKubectl(clusterID, server, ca string) {
+func configureKubectl(clusterID, server, ca, authToken string) {
 	filePath := path.Join(getConfigDirOrDie(), clusterID+"-cert.pem")
 	ioutil.WriteFile(filePath, []byte(ca), 0644)
 	runKubectlCommand("config",
@@ -31,7 +31,7 @@ func configureKubectl(clusterID, server, ca string) {
 		"--certificate-authority", filePath,
 		"--embed-certs",
 	)
-	runKubectlCommand("config", "set-credentials", "krucible-"+clusterID, "--token", "krucible")
+	runKubectlCommand("config", "set-credentials", "krucible-"+clusterID, "--token", authToken)
 	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID, "--user", "krucible-"+clusterID)
 	runKubectlCommand("config", "use-context", clusterID)
 }
@@ -58,6 +58,7 @@ var configureKubectlCmd = &cobra.Command{
 			cluster.ID,
 			cluster.ConnectionDetails.Server,
 			cluster.ConnectionDetails.CertificateAuthority,
+			cluster.ConnectionDetails.ClusterAuthToken,
 		)
 	},
 }

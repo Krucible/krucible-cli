@@ -73,6 +73,7 @@ var clusterCmd = &cobra.Command{
 				cluster.ID,
 				cluster.ConnectionDetails.Server,
 				cluster.ConnectionDetails.CertificateAuthority,
+				cluster.ConnectionDetails.ClusterAuthToken,
 			)
 		}
 	},
