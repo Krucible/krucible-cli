@@ -45,8 +45,11 @@ func getConfigDirOrDie() string {
 		fmt.Fprintln(os.Stderr, "Error: could not get user config dir")
 		panic(err)
 	}
-
-	return path.Join(rootConfigDir, "krucible")
+	configDir := path.Join(rootConfigDir, "krucible")
+	if err := os.MkdirAll(configDir, 0700); err != nil {
+		panic(err)
+	}
+	return configDir
 }
 
 // initConfig reads in config file and ENV variables if set.

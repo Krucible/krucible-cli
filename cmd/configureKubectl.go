@@ -26,7 +26,9 @@ func runKubectlCommand(args ...string) {
 
 func configureKubectl(clusterID, server, ca, authToken string) {
 	filePath := path.Join(getConfigDirOrDie(), clusterID+"-cert.pem")
-	ioutil.WriteFile(filePath, []byte(ca), 0644)
+	if err := ioutil.WriteFile(filePath, []byte(ca), 0644); err != nil {
+		panic(err)
+	}
 	runKubectlCommand("config",
 		"set-cluster", clusterID,
 		"--server", server,

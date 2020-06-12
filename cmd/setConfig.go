@@ -29,11 +29,6 @@ API keys can be created at https://usekrucible.com/api-keys`,
 		}
 
 		if viper.ConfigFileUsed() == "" {
-			err := os.MkdirAll(getConfigDirOrDie(), 0700)
-			if err != nil {
-				panic(err)
-			}
-
 			configFilePath := path.Join(getConfigDirOrDie(), "config.json")
 			f, err := os.Create(configFilePath)
 			if err != nil {
