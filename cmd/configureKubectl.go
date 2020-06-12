@@ -17,12 +17,8 @@ func runKubectlCommand(args ...string) {
 		os.Exit(1)
 	}
 	kctlExec := exec.Command(kubectlPath, args...)
-	if err = kctlExec.Run(); err != nil {
+	if kOutput, err := kctlExec.CombinedOutput(); err != nil {
 		fmt.Fprintln(os.Stderr, "kubectl command errored. This is the output:")
-		kOutput, outErr := kctlExec.CombinedOutput()
-		if outErr != nil {
-			panic(outErr)
-		}
 		fmt.Fprintf(os.Stderr, string(kOutput))
 		panic(err)
 	}
