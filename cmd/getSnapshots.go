@@ -26,6 +26,6 @@ var getSnapshotsCmd = &cobra.Command{
 	},
 }
 
-func init() {
-	getCmd.AddCommand(getSnapshotsCmd)
-}
+//func init() {
+//getCmd.AddCommand(getSnapshotsCmd)
+//}

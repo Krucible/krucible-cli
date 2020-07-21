@@ -31,8 +31,8 @@ var createSnapshotCmd = &cobra.Command{
 	},
 }
 
-func init() {
-	createCmd.AddCommand(createSnapshotCmd)
-	createSnapshotCmd.Flags().StringVarP(&ClusterID, "cluster", "c", "", "The ID of the cluster to snapshot")
-	createSnapshotCmd.MarkFlagRequired("cluster")
-}
+//func init() {
+//createCmd.AddCommand(createSnapshotCmd)
+//createSnapshotCmd.Flags().StringVarP(&ClusterID, "cluster", "c", "", "The ID of the cluster to snapshot")
+//createSnapshotCmd.MarkFlagRequired("cluster")
+//}
