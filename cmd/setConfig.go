@@ -12,6 +12,7 @@ var APIKeyID string
 var APIKeySecret string
 var AccountID string
 var BaseURL string
+var ClusterID string
 
 // setConfigCmd represents the setConfig command
 var setConfigCmd = &cobra.Command{

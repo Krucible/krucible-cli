@@ -1,9 +1,11 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"time"
 
+	"github.com/Krucible/krucible-go-client/krucible"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
@@ -19,25 +21,35 @@ var getClustersCmd = &cobra.Command{
 			panic(err)
 		}
 
+		activeClusters := []krucible.Cluster{}
+		for _, c := range clusters {
+			if c.State != "deprovisioned" {
+				activeClusters = append(activeClusters, c)
+			}
+		}
+
+		if len(activeClusters) == 0 {
+			fmt.Println("No active clusters found.")
+			return
+		}
+
 		table := tablewriter.NewWriter(os.Stdout)
 		table.SetBorder(false)
-		for _, c := range clusters {
-			table.SetHeader([]string{
-				"ID",
-				"Name",
-				"State",
-				"Created",
-				"Expires",
+		table.SetHeader([]string{
+			"ID",
+			"Name",
+			"State",
+			"Created",
+			"Expires",
+		})
+		for _, c := range activeClusters {
+			table.Append([]string{
+				c.ID,
+				c.DisplayName,
+				c.State,
+				c.CreatedAt.Format(time.RFC822),
+				c.ExpiresAt.Format(time.RFC822),
 			})
-			if c.State == "running" {
-				table.Append([]string{
-					c.ID,
-					c.DisplayName,
-					c.State,
-					c.CreatedAt.Format(time.RFC822),
-					c.ExpiresAt.Format(time.RFC822),
-				})
-			}
 		}
 		table.Render()
 	},
