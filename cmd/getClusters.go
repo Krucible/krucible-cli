@@ -1,9 +1,10 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
+	"os"
+	"time"
 
+	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
 
@@ -18,11 +19,27 @@ var getClustersCmd = &cobra.Command{
 			panic(err)
 		}
 
-		jsonBytes, err := json.MarshalIndent(clusters, "", " ")
-		if err != nil {
-			panic(err)
+		table := tablewriter.NewWriter(os.Stdout)
+		table.SetBorder(false)
+		for _, c := range clusters {
+			table.SetHeader([]string{
+				"ID",
+				"Name",
+				"State",
+				"Created",
+				"Expires",
+			})
+			if c.State == "running" {
+				table.Append([]string{
+					c.ID,
+					c.DisplayName,
+					c.State,
+					c.CreatedAt.Format(time.RFC822),
+					c.ExpiresAt.Format(time.RFC822),
+				})
+			}
 		}
-		fmt.Println(string(jsonBytes))
+		table.Render()
 	},
 }
 
