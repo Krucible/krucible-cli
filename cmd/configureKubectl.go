@@ -30,14 +30,14 @@ func configureKubectl(clusterID, server, ca, authToken string) {
 		panic(err)
 	}
 	runKubectlCommand("config",
-		"set-cluster", clusterID,
+		"set-cluster", "krucible-"+clusterID,
 		"--server", server,
 		"--certificate-authority", filePath,
 		"--embed-certs",
 	)
 	runKubectlCommand("config", "set-credentials", "krucible-"+clusterID, "--token", authToken)
-	runKubectlCommand("config", "set-context", clusterID, "--cluster", clusterID, "--user", "krucible-"+clusterID)
-	runKubectlCommand("config", "use-context", clusterID)
+	runKubectlCommand("config", "set-context", "krucible-"+clusterID, "--cluster", "krucible-"+clusterID, "--user", "krucible-"+clusterID)
+	runKubectlCommand("config", "use-context", "krucible-"+clusterID)
 }
 
 // configureKubectlCmd represents the configure-kubectl command
