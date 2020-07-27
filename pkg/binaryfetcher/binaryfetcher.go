@@ -68,6 +68,9 @@ func GetBinary(binaryName, configDir string) string {
 		if err != nil {
 			panic(err)
 		}
+		if resp.StatusCode != 200 {
+			panic("Received the following status code: " + string(resp.StatusCode))
+		}
 		defer resp.Body.Close()
 		defer binary.Sync()
 		defer binary.Close()
