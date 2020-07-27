@@ -7,7 +7,8 @@ import (
 // helmCmd represents the helm command
 var helmCmd = &cobra.Command{
 	Use:   "helm",
-	Short: "Run kubebox for the given cluster",
+	Short: "Run a helm command against the given cluster",
+	Long: "Helm is a package manager for Kubernetes",
 	Run: func(cmd *cobra.Command, args []string) {
 		RunBinary("helm", ClusterID, args)
 	},
