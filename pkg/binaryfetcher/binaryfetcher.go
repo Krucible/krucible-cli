@@ -26,7 +26,7 @@ var binaryDownloadLocations = map[string]map[string]string{
 		"darwin":  "https://github.com/astefanutti/kubebox/releases/download/v0.8.0/kubebox-macos",
 	},
 	"helm": map[string]string{
-		"windows": "https://krucible-cli-binaries.s3-eu-west-1.amazonaws.com/helm/helm-v3.2.1-windows-amd64",
+		"windows": "https://krucible-cli-binaries.s3-eu-west-1.amazonaws.com/helm/helm-v3.2.1-windows-amd64.exe",
 		"linux":   "https://krucible-cli-binaries.s3-eu-west-1.amazonaws.com/helm/helm-v3.2.1-linux-amd64",
 		"darwin":  "https://krucible-cli-binaries.s3-eu-west-1.amazonaws.com/helm/helm-v3.2.1-darwin-amd64",
 	},
