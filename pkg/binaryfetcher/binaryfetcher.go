@@ -54,6 +54,9 @@ func createClusterConfigFile(client *krucible.Client, clusterID, configDir strin
 func GetBinary(binaryName, configDir string) string {
 	os.MkdirAll(path.Join(configDir, "bin"), 0755)
 	downloadLocation := binaryDownloadLocations[binaryName][runtime.GOOS]
+	if runtime.GOOS == "windows" {
+		binaryName += ".exe"
+	}
 	binaryLocation := path.Join(configDir, "bin", binaryName)
 	if _, err := os.Stat(binaryLocation); os.IsNotExist(err) {
 		binary, err := os.OpenFile(binaryLocation, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0770)
